@@ -4,7 +4,7 @@ import io.restassured.RestAssured;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class FirstProgram {
+public class AddPlace {
 
 	public static void main(String[] args)
 	{
