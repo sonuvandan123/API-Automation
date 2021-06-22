@@ -3,6 +3,8 @@ package basic.ResultAsuuredFirstPro;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+import org.testng.Assert;
+
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 
@@ -34,6 +36,16 @@ public class AddPlaceAndGetOneJsonKeyData {
 		.then().log().all()
 		.body("msg",equalTo("Address successfully updated"));
 		
+		String response2=given().queryParam("key","qaclick123").queryParam("place_id",placeId).header("Content-Type","application/json")
+		.when().get("/maps/api/place/get/json")
+		.then().header("server","Apache/2.4.18 (Ubuntu)").extract().response().asString();
+		
+		JsonPath js2=PayLoad.rawtoJson(response2);
+		String address=js2.get("address");	
+	    Assert.assertEquals(address, "Noida, India");
+		//System.out.println("response is"+response2);
+		
+	    
 	}
 
 }
